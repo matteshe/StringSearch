@@ -67,6 +67,20 @@ public class StringSearchTest
         Assert.That(commonStrings, Contains.Item(expectedCommonString));
     }
 
+    [Test]
+    public void CommonStringFoundInTheMiddle()
+    {
+        const string expectedCommonString = " eat ";
+        const string leftSentence = "An ape eat banana";
+        const string rightSentence = "I eat food";
+
+        var commonStrings = Search.FindLongestCommonString(leftSentence, rightSentence);
+
+        Assert.That(commonStrings, Has.Count.EqualTo(1));
+
+        Assert.That(commonStrings, Contains.Item(expectedCommonString));
+    }
+
 
     #region CreateChunks
     [Test]
@@ -89,4 +103,16 @@ public class StringSearchTest
         Assert.That(Search.CreateChunks(input, 3), Has.Count.EqualTo(3));
     }
     #endregion
+
+    [Test]
+    public void IntersectTwoListsWithOneCommonItem()
+    {
+        var a = new List<string> { "1", "2" };
+        var b = new List<string> { "3", "2" };
+
+        var c = a.Intersect(b);
+
+        Assert.That(c, Contains.Item("2"));
+
+    }
 }

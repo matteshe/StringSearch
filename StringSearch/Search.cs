@@ -4,7 +4,7 @@ public static class Search
     public static List<string> FindLongestCommonString(string left, string right)
     {
         var commonStrings = new List<string>();
-        
+
         if (string.IsNullOrEmpty(left) || string.IsNullOrEmpty(right))
         {
             return commonStrings;
@@ -25,9 +25,52 @@ public static class Search
             var leftChunks = CreateChunks(left, right.Length);
 
             commonStrings.AddRange(from chunk in leftChunks
-                where right.Equals(chunk)
-                select right);
+                                   where right.Equals(chunk)
+                                   select right);
+
+            if (commonStrings.Count == 0)
+            {
+                var max = left.Length >= right.Length ? left.Length : right.Length;
+
+                commonStrings.AddRange(findCommonString(max, 0, max / 2, left, right));
+            }
         }
+
+        return commonStrings;
+    }
+
+    private static IEnumerable<string> findCommonString(int high, int low, int middle, string left, string right)
+    {
+        var commonStrings = new List<string>();
+
+        if (high == middle || low == middle)
+        {
+            return commonStrings;
+        }
+
+        var leftChunks = CreateChunks(left, middle);
+        var rightChunks = CreateChunks(right, middle);
+
+        commonStrings = leftChunks.Intersect(rightChunks).ToList();
+        if (commonStrings.Any())
+        {
+
+            var cs = findCommonString(high, middle, middle + (high - middle) / 2, left, right);
+            if (cs.Any())
+            {
+                commonStrings = cs.ToList();
+            }
+        }
+        else
+        {
+            var cs = findCommonString(middle, low, middle - (middle - low) / 2, left, right);
+            if (cs.Any())
+            {
+                commonStrings = cs.ToList();
+            }
+
+        }
+
 
         return commonStrings;
     }
