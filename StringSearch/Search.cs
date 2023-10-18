@@ -43,7 +43,11 @@ public static class Search
 
         for (var i = 0; i <= input.Length - length; i++)
         {
-            chunks.Add(input.Substring(i, length));
+            var chunk = input.Substring(i, length);
+            if (!chunks.Contains(chunk))
+            {
+                chunks.Add(input.Substring(i, length));
+            }
         }
         return chunks;
     }
