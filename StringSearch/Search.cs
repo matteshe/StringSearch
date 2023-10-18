@@ -14,6 +14,14 @@ public static class Search
         {
             commonStrings.Add(left);
         }
+        else
+        {
+            commonStrings.AddRange(from rightChar in right.ToCharArray()
+                                   where left[0] == rightChar
+                                   select left);
+        }
+
+
 
         return commonStrings;
     }
