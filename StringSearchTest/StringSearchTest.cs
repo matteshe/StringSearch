@@ -46,7 +46,7 @@ public class StringSearchTest
     }
 
     [Test]
-    public void CommonStringFoundTwoChar()
+    public void CommonStringFoundTwoCharLeft()
     {
         const string expectedCommonString = "ab";
         var commonStrings = Search.FindLongestCommonString(expectedCommonString, expectedCommonString + "ac" + expectedCommonString);
@@ -56,6 +56,19 @@ public class StringSearchTest
         Assert.That(commonStrings, Contains.Item(expectedCommonString));
     }
 
+    [Test]
+    public void CommonStringFoundTwoCharRight()
+    {
+        const string expectedCommonString = "ab";
+        var commonStrings = Search.FindLongestCommonString(expectedCommonString + "ac" + expectedCommonString, expectedCommonString);
+
+        Assert.That(commonStrings, Has.Count.EqualTo(2));
+
+        Assert.That(commonStrings, Contains.Item(expectedCommonString));
+    }
+
+
+    #region CreateChunks
     [Test]
     public void NoChunksForLengthZero()
     {
@@ -75,4 +88,5 @@ public class StringSearchTest
         const string input = "Hello";
         Assert.That(Search.CreateChunks(input, 3), Has.Count.EqualTo(3));
     }
+    #endregion
 }

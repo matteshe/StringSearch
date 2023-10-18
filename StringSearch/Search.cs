@@ -21,6 +21,12 @@ public static class Search
             commonStrings.AddRange(from chunk in rightChunks
                                    where left.Equals(chunk)
                                    select left);
+
+            var leftChunks = CreateChunks(left, right.Length);
+
+            commonStrings.AddRange(from chunk in leftChunks
+                where right.Equals(chunk)
+                select right);
         }
 
         return commonStrings;
