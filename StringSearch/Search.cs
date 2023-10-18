@@ -16,13 +16,29 @@ public static class Search
         }
         else
         {
-            commonStrings.AddRange(from rightChar in right.ToCharArray()
-                                   where left[0] == rightChar
+            var rightChunks = CreateChunks(right, left.Length);
+
+            commonStrings.AddRange(from chunk in rightChunks
+                                   where left.Equals(chunk)
                                    select left);
         }
 
-
-
         return commonStrings;
+    }
+
+    public static List<string> CreateChunks(string input, int length)
+    {
+        var chunks = new List<string>();
+
+        if (length == 0)
+        {
+            return chunks;
+        }
+
+        for (var i = 0; i <= input.Length - length; i++)
+        {
+            chunks.Add(input.Substring(i, length));
+        }
+        return chunks;
     }
 }

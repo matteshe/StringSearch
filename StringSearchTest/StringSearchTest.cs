@@ -28,9 +28,9 @@ public class StringSearchTest
     }
 
     [Test]
-    public void CommonStringFoundForStringLengthOne()
+    public void CommonStringFoundForIdenticalStrings()
     {
-        Assert.That(Search.FindLongestCommonString("a", "a"), Has.Count.EqualTo(1));
+        Assert.That(Search.FindLongestCommonString("SameString", "SameString"), Has.Count.EqualTo(1));
     }
 
     [Test]
@@ -43,5 +43,36 @@ public class StringSearchTest
     public void CommonStringFoundOneCharDifferent()
     {
         Assert.That(Search.FindLongestCommonString("a", "Banane"), Has.Count.EqualTo(2));
+    }
+
+    [Test]
+    public void CommonStringFoundTwoChar()
+    {
+        const string expectedCommonString = "ab";
+        var commonStrings = Search.FindLongestCommonString(expectedCommonString, expectedCommonString + "ac" + expectedCommonString);
+        
+        Assert.That(commonStrings, Has.Count.EqualTo(2));
+
+        Assert.That(commonStrings, Contains.Item(expectedCommonString));
+    }
+
+    [Test]
+    public void NoChunksForLengthZero()
+    {
+        Assert.That(Search.CreateChunks("Hello", 0), Has.Count.EqualTo(0));
+    }
+
+    [Test]
+    public void FoundChunksEqualToInputLengthForLengthOne()
+    {
+        const string input = "Hello";
+        Assert.That(Search.CreateChunks(input, 1), Has.Count.EqualTo(input.Length));
+    }
+
+    [Test]
+    public void FoundChunksForLengthThree()
+    {
+        const string input = "Hello";
+        Assert.That(Search.CreateChunks(input, 3), Has.Count.EqualTo(3));
     }
 }
