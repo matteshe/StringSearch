@@ -16,30 +16,15 @@ public static class Search
         }
         else
         {
-            var rightChunks = CreateChunks(right, left.Length);
-
-            commonStrings.AddRange(from chunk in rightChunks
-                                   where left.Equals(chunk)
-                                   select left);
-
-            var leftChunks = CreateChunks(left, right.Length);
-
-            commonStrings.AddRange(from chunk in leftChunks
-                                   where right.Equals(chunk)
-                                   select right);
-
-            if (commonStrings.Count == 0)
-            {
                 var max = left.Length >= right.Length ? left.Length : right.Length;
 
                 commonStrings.AddRange(findCommonString(max, 0, max / 2, left, right));
-            }
         }
 
         return commonStrings;
     }
 
-    private static IEnumerable<string> findCommonString(int high, int low, int middle, string left, string right)
+    private static List<string> findCommonString(int high, int low, int middle, string left, string right)
     {
         var commonStrings = new List<string>();
 
@@ -58,7 +43,7 @@ public static class Search
             var cs = findCommonString(high, middle, middle + (high - middle) / 2, left, right);
             if (cs.Any())
             {
-                commonStrings = cs.ToList();
+                commonStrings = cs;
             }
         }
         else
@@ -66,7 +51,7 @@ public static class Search
             var cs = findCommonString(middle, low, middle - (middle - low) / 2, left, right);
             if (cs.Any())
             {
-                commonStrings = cs.ToList();
+                commonStrings = cs;
             }
 
         }
