@@ -81,6 +81,32 @@ public class StringSearchTest
         Assert.That(commonStrings, Contains.Item(expectedCommonString));
     }
 
+    [Test]
+    public void MultipleCommonStringButOnlyOneLongestFound()
+    {
+        const string expectedCommonString = " banana";
+        const string leftSentence = "An ape eat banana";
+        const string rightSentence = "I eat also banana";
+
+        var commonStrings = Search.FindLongestCommonString(leftSentence, rightSentence);
+
+        Assert.That(commonStrings, Has.Count.EqualTo(1));
+        Assert.That(commonStrings, Contains.Item(expectedCommonString));
+    }
+
+    [Test]
+    public void MultipleCommonStringSameLengthFound()
+    {
+        const string leftSentence = "monday tuesday wednesday thursday friday satureday sunday";
+        const string rightSentence = "wednesday sunday monday friday thursday tuesday satureday";
+
+        var commonStrings = Search.FindLongestCommonString(leftSentence, rightSentence);
+
+        Assert.That(commonStrings, Has.Count.EqualTo(2));
+        Assert.That(commonStrings, Contains.Item("day thursday "));
+        Assert.That(commonStrings, Contains.Item("day satureday"));
+    }
+
 
     #region CreateChunks
     [Test]
