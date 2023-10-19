@@ -107,6 +107,43 @@ public class StringSearchTest
         Assert.That(commonStrings, Contains.Item("day satureday"));
     }
 
+    [Test]
+    public void EntwicklerheldTestDataOne()
+    {
+        const string leftSentence = "CHECKITWHEREISTHELONGESTSUBSTRING24";
+        const string rightSentence = "SUBSTINGWHERECHECKITANTCHECK24ISCHECKWHERE";
+
+        var commonStrings = Search.FindLongestCommonString(leftSentence, rightSentence);
+
+        Assert.That(commonStrings, Contains.Item("CHECKIT"));
+        Assert.That(commonStrings, Has.Count.EqualTo(1));
+    }
+
+    [Test]
+    public void EntwicklerheldTestDataTwo()
+    {
+        const string leftSentence = "247WECODEONLINEONENTWICKLERHELDDECHECKITOUT";
+        const string rightSentence = "CHECKITOUTWECODEONLINEON24ENTWICKLERHELDOUT";
+
+        var commonStrings = Search.FindLongestCommonString(leftSentence, rightSentence);
+
+        Assert.That(commonStrings, Contains.Item("WECODEONLINEON"));
+        Assert.That(commonStrings, Contains.Item("ENTWICKLERHELD"));
+        Assert.That(commonStrings, Has.Count.EqualTo(2));
+    }
+
+    [Test]
+    public void EntwicklerheldTestDataThree()
+    {
+        const string leftSentence = "DONUTSAREDELICIOUSBUTIALSOLOVECHECK24PIZZA";
+        const string rightSentence = "PIZZASAREYUMMYBUTIDOALSOLOVEDONUTSFROMCHECK24";
+
+        var commonStrings = Search.FindLongestCommonString(leftSentence, rightSentence);
+
+        Assert.That(commonStrings, Contains.Item("ALSOLOVE"));
+        Assert.That(commonStrings, Has.Count.EqualTo(1));
+    }
+
 
     #region CreateChunks
     [Test]
