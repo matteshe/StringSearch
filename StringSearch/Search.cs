@@ -18,13 +18,13 @@ public static class Search
         {
                 var max = left.Length >= right.Length ? left.Length : right.Length;
 
-                commonStrings.AddRange(findCommonString(max, 0, max / 2, left, right));
+                commonStrings.AddRange(FindCommonString(max, 0, max / 2, left, right));
         }
 
         return commonStrings;
     }
 
-    private static List<string> findCommonString(int high, int low, int middle, string left, string right)
+    private static List<string> FindCommonString(int high, int low, int middle, string left, string right)
     {
         var commonStrings = new List<string>();
 
@@ -40,7 +40,7 @@ public static class Search
         if (commonStrings.Any())
         {
 
-            var cs = findCommonString(high, middle, middle + (high - middle) / 2, left, right);
+            var cs = FindCommonString(high, middle, middle + (high - middle) / 2, left, right);
             if (cs.Any())
             {
                 commonStrings = cs;
@@ -48,7 +48,7 @@ public static class Search
         }
         else
         {
-            var cs = findCommonString(middle, low, middle - (middle - low) / 2, left, right);
+            var cs = FindCommonString(middle, low, middle - (middle - low) / 2, left, right);
             if (cs.Any())
             {
                 commonStrings = cs;
