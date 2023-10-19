@@ -1,7 +1,7 @@
 ﻿namespace StringSearch;
 public static class Search
 {
-    public static List<string> findLongestSubstring(string left, string right)
+    public static List<string> FindLongestSubstring(string left, string right)
     {
         var commonStrings = new List<string>();
 
